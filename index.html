@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dear Simmi, Will You Be My Valentine? 💖</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  height:100vh;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+.card{
+  background:white;
+  width:90%;
+  max-width:450px;
+  padding:35px;
+  border-radius:28px;
+  text-align:center;
+  box-shadow:0 20px 45px rgba(0,0,0,.25);
+  animation:pop .5s ease;
+}
+@keyframes pop{
+  from{transform:scale(.85);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+.fade{animation:fade .5s ease}
+@keyframes fade{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+h1,h2{color:#ff4d6d}
+p{color:#444;line-height:1.6}
+button{
+  background:#ff4d6d;
+  color:white;
+  border:none;
+  padding:12px 28px;
+  margin:10px;
+  font-size:16px;
+  border-radius:30px;
+  cursor:pointer;
+  transition:.2s;
+}
+button:hover{transform:scale(1.07)}
+.small{background:#eee;color:#333}
+ul{text-align:left;list-style:none;padding:0}
+li{margin:8px 0}
+img{
+  width:100%;
+  border-radius:18px;
+  margin:10px 0;
+}
+.hearts{
+  position:fixed;
+  font-size:22px;
+  animation:float 4s linear infinite;
+}
+@keyframes float{
+  from{transform:translateY(0);opacity:1}
+  to{transform:translateY(-900px);opacity:0}
+}
+.music{
+  position:fixed;
+  bottom:15px;
+  right:15px;
+  background:white;
+  padding:10px 14px;
+  border-radius:30px;
+  font-size:14px;
+  cursor:pointer;
+  box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="app"></div>
+<div class="music" onclick="toggleMusic()">🎶 Music</div>
+
+<audio id="bgm" loop>
+  <source src="Dooron Dooron.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let step = 0;
+const app = document.getElementById("app");
+const music = document.getElementById("bgm");
+const herName = "Simmi";
+
+function render(){
+  if(step === 0){
+    app.innerHTML = `
+      <div class="fade">
+        <h1 id="type"></h1>
+        <p>
+          I know I am a little late…<br>
+          but there’s something I really wanted to ask 🥹
+        </p>
+        <button onclick="next()">yes 😌</button>
+        <button onclick="next()">please say yessssss 😭</button>
+      </div>
+    `;
+    typeText(
+      document.getElementById("type"),
+      "Hello ji sasriyaakaal 😳💖"
+    );
+  }
+
+  if(step === 1){
+    app.innerHTML = `
+      <div class="fade">
+        <p><b>
+          You always ask why I love you…<br>
+          and honestly, it’s the hardest question 😭<br><br>
+          Because you gave me SO MANY reasons.
+        </b></p>
+
+        <h1>Some reasons I fell for you 💕</h1>
+        <ul>
+          <li>💖 Your smile was the first thing I fell for</li>
+          <li>👀 Your eyes are like deep ocean full of love and joy (cat eyesssss)</li>
+          <li>🤍 Your support for  when no one was there</li>
+          <li>✨ You made me feel valuable and important</li>
+          <li>🤗 Your hugs are the most comfortable thing i got in no time <b>YOU became my comfort zone</b></li>
+        </ul>
+        <button onclick="next()">wanna know more 😏</button>
+      </div>
+    `;
+  }
+
+  if(step === 2){
+    app.innerHTML = `
+      <div class="fade">
+        <h1>Jainwin Fact 😏</h1>
+        <p>Do you know who looks cute together?</p>
+        <button onclick="next()">us 😍</button>
+        <button onclick="next()">Simmi & Shreshth (obviously)</button>
+      </div>
+    `;
+  }
+
+  if(step === 3){
+    app.innerHTML = `
+      <div class="fade">
+        <h1>Us 👉👈</h1>
+        <p>Every moment with you lives here </p>
+        <img src="us.jpeg">
+        <button onclick="next()">okay… one last thing 😳</button>
+      </div>
+    `;
+  }
+
+  if(step === 4){
+    app.innerHTML = `
+      <div class="fade">
+        <h1>Last but not the least 💘</h1>
+        <h2>Will you be my Valentine?</h2>
+        <button id="yes">YES 💖</button>
+        <button id="no" class="small">NO 😒</button>
+      </div>
+    `;
+    document.getElementById("yes").onclick = celebrate;
+    document.getElementById("no").onmouseover = runAway;
+    document.getElementById("no").onclick = () =>
+      alert("ERROR 404 😌\nValentine request cannot be rejected");
+  }
+}
+
+function next(){
+  if(step === 0) music.play();
+  step++;
+  render();
+}
+
+function runAway(e){
+  const lines = ["NO 😒","Are you sure? 😳","mat karo pls 🥺","last chance 😭"];
+  const b = e.target;
+  b.innerText = lines[Math.floor(Math.random()*lines.length)];
+  b.style.position="absolute";
+  b.style.left=Math.random()*(window.innerWidth-120)+"px";
+  b.style.top=Math.random()*(window.innerHeight-120)+"px";
+}
+
+function celebrate(){
+  app.innerHTML = `
+    <div class="fade">
+      <h1>hehe 😭💖</h1>
+      <p>
+        kya matlab ab you are stuck with me 😏<br><br>
+        You just made a different insaan very happy 🥹<br><br>
+        <b>
+          You are my beginning,<br>
+          my middle,<br>
+          and my future.
+        </b><br><br>
+      
+      </p>
+    </div>
+  `;
+  rain();
+}
+
+function rain(){
+  const emojis = ["💖","🥹","😍","🧸","😘"];
+  for(let i=0;i<40;i++){
+    const h=document.createElement("div");
+    h.className="hearts";
+    h.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+    h.style.left=Math.random()*100+"vw";
+    h.style.bottom="0";
+    h.style.animationDuration=2+Math.random()*3+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),4000);
+  }
+}
+
+function toggleMusic(){
+  music.paused ? music.play() : music.pause();
+}
+
+function typeText(el,text,speed=40){
+  let i=0;
+  el.innerHTML="";
+  const t=setInterval(()=>{
+    el.innerHTML+=text.charAt(i);
+    i++;
+    if(i>=text.length) clearInterval(t);
+  },speed);
+}
+
+render();
+</script>
+
+</body>
+</html>
